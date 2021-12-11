@@ -7,8 +7,8 @@ namespace eGertis.models
 {
     public class OrderComponent 
     {
-        private int id {get; set;}
-        private Item item {get; set;}
-        private int quantity{get; set;}
+        public int Id {get; set;}
+        public Item Item {get; set;}
+        public int Quantity{get; set;}
     }
 }

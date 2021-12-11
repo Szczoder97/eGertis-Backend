@@ -7,7 +7,7 @@ namespace eGertis.models
 {
     public class Item
     {
-        private int id {get; set;}
-        private string name {get; set;}
+        public int Id {get; set;}
+        public string Name {get; set;}
     }
 }
