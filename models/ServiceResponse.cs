@@ -7,8 +7,8 @@ namespace eGertis.models
 {
     public class ServiceResponse<T>
     {
-        T data {get; set;}
-        bool succes {get; set;} = true;
-        string message {get; set;} = null;
+        public T Data {get; set;}
+        public bool Succes {get; set;} = true;
+        public string Message {get; set;} = null;
     }
 }
