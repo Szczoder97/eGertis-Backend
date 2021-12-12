@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eGertis.Dtos.Item;
-using eGertis.models;
+using eGertis.Models;
 using eGertis.Services.Items;
 using Microsoft.AspNetCore.Mvc;
 

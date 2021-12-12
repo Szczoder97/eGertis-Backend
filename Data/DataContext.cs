@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eGertis.models;
+using eGertis.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace eGertis.Data

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using eGertis.Data;
 using eGertis.Dtos.Item;
-using eGertis.models;
+using eGertis.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace eGertis.Services.Items

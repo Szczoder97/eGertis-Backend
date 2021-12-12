@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace eGertis.Models
 {
-    public class Item
+    public class SailCamp
     {
         public int Id {get; set;}
         public string Name {get; set;}
+        public List<User> Instructors {get; set;}
+        public List<FinalOrder> Orders {get; set;}
     }
 }
