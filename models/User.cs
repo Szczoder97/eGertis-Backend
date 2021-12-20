@@ -13,7 +13,9 @@ namespace eGertis.Models
         public string Email {get; set;}
         public string Name {get; set;}
         public string Surname {get; set;}
-        public UserRoles role {get; set;}
+        public byte[] PasswordSalt {get; set;}
+        public byte[] PasswordHash {get; set;}
+        public UserRoles Role {get; set;}
         public SailCamp SailCamp {get; set;}
         public List<Order> Orders {get; set;}
     }

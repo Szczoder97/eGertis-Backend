@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using eGertis.Dtos.Item;
 using eGertis.Models;
 using eGertis.Services.Items;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eGertis.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ItemController : ControllerBase
