@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using eGertis.Dtos.Item;
-using eGertis.models;
+using eGertis.Models;
 
 namespace eGertis
 {
