@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using eGertis.Dtos.Item;
+using eGertis.Dtos.SailCamp;
 using eGertis.Models;
 
 namespace eGertis
@@ -15,6 +16,9 @@ namespace eGertis
             CreateMap<AddItemDto, Item>();
             CreateMap<Item, GetItemDto>();
             CreateMap<UpdateItemDto, Item>();
+            CreateMap<SailCamp, GetSailCampDto>();
+            CreateMap<CreateSailCampDto, SailCamp>();
+            CreateMap<EditSailCampDto, SailCamp>();
         }
     }
 }
