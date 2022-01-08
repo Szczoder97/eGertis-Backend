@@ -13,6 +13,6 @@ namespace eGertis.Services.Items
         Task<ServiceResponse<List<GetItemDto>>> GetAllItems();
         Task<ServiceResponse<List<GetItemDto>>> AddItem(AddItemDto itemDto);
         Task<ServiceResponse<List<GetItemDto>>> UpdateItem(UpdateItemDto itemDto);
-        Task<ServiceResponse<List<GetItemDto>>> DeleteItem(int id);
+        Task<ServiceResponse<List<GetItemDto>>> RemoveItem(int id);
     }
 }

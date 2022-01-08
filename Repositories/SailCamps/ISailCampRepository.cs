@@ -11,7 +11,7 @@ namespace eGertis.Repositories.SailCamps
         Task<List<SailCamp>> CreateSailCamp(SailCamp sailCamp);
         Task<SailCamp> GetSailCampById(int id);
         Task<List<SailCamp>> GetAllSailCamps();
-        Task<List<SailCamp>> EditSailCamp(SailCamp sailCamp);     
+        Task<List<SailCamp>> UpdateSailCamp(SailCamp sailCamp);     
         Task<List<SailCamp>> RemoveSailcamp(int id);   
     }
 }

@@ -12,7 +12,7 @@ namespace eGertis.Services.SailCamps
         Task<ServiceResponse<List<GetSailCampDto>>> GetAllSailCamps();
         Task<ServiceResponse<GetSailCampDto>> GetSailCapmById(int id);
         Task<ServiceResponse<List<GetSailCampDto>>> CreateSailCamp(CreateSailCampDto sailCampDto);
-        Task<ServiceResponse<List<GetSailCampDto>>> EditSailCamp(EditSailCampDto sailCampDto);
+        Task<ServiceResponse<List<GetSailCampDto>>> UpdateSailCamp(UpdateSailCampDto sailCampDto);
         Task<ServiceResponse<List<GetSailCampDto>>> RemoveSailCamp(int id);
 
     }

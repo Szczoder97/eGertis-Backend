@@ -19,7 +19,7 @@ namespace eGertis
             CreateMap<UpdateItemDto, Item>();
             CreateMap<SailCamp, GetSailCampDto>();
             CreateMap<CreateSailCampDto, SailCamp>();
-            CreateMap<EditSailCampDto, SailCamp>();
+            CreateMap<UpdateSailCampDto, SailCamp>();
             CreateMap<User, GetUserDto>();
         }
     }

@@ -17,6 +17,7 @@ using eGertis.Repositories.SailCamps;
 using eGertis.Services.SailCamps;
 using eGertis.Repositories.Users;
 using eGertis.Services.Users;
+using eGertis.Repositories.Items;
 
 namespace eGertis
 {
@@ -59,6 +60,7 @@ namespace eGertis
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAuthService, AuthService>();

@@ -45,9 +45,9 @@ namespace eGertis.Controllers
         }
         
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ServiceResponse<List<GetItemDto>>>> DeleteItem(int id)
+        public async Task<ActionResult<ServiceResponse<List<GetItemDto>>>> RemoveItem(int id)
         {
-            return Ok(await _itemServie.DeleteItem(id));
+            return Ok(await _itemServie.RemoveItem(id));
         }
     }
 }

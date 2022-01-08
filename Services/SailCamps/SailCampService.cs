@@ -18,47 +18,87 @@ namespace eGertis.Services.SailCamps
         {
             _sailCampRepository = sailCampRepository;
             _mapper = mapper;
-         
+
         }
         public async Task<ServiceResponse<List<GetSailCampDto>>> CreateSailCamp(CreateSailCampDto sailCampDto)
         {
-            var response = new ServiceResponse<List<GetSailCampDto>>();
-            var sailCamp = _mapper.Map<SailCamp>(sailCampDto);
-            var camps = await _sailCampRepository.CreateSailCamp(sailCamp);
-            response.Data = camps.Select(c => _mapper.Map<GetSailCampDto>(c)).ToList();
-            return response;
+            var serviceResponse = new ServiceResponse<List<GetSailCampDto>>();
+            try
+            {
+                var sailCamp = _mapper.Map<SailCamp>(sailCampDto);
+                var camps = await _sailCampRepository.CreateSailCamp(sailCamp);
+                serviceResponse.Data = camps.Select(c => _mapper.Map<GetSailCampDto>(c)).ToList();
+            }
+            catch (Exception e)
+            {
+                serviceResponse.Succes = false;
+                serviceResponse.Message = e.Message;
+            }
+            return serviceResponse;
 
         }
 
-        public async Task<ServiceResponse<List<GetSailCampDto>>> EditSailCamp(EditSailCampDto sailCampDto)
+        public async Task<ServiceResponse<List<GetSailCampDto>>> UpdateSailCamp(UpdateSailCampDto sailCampDto)
         {
             var serviceResponse = new ServiceResponse<List<GetSailCampDto>>();
-            var sailCamp = _mapper.Map<SailCamp>(sailCampDto);
-            var camps = await _sailCampRepository.EditSailCamp(sailCamp);
-            serviceResponse.Data = camps.Select(c => _mapper.Map<GetSailCampDto>(c)).ToList();
+            try
+            {
+                var sailCamp = _mapper.Map<SailCamp>(sailCampDto);
+                var camps = await _sailCampRepository.UpdateSailCamp(sailCamp);
+                serviceResponse.Data = camps.Select(c => _mapper.Map<GetSailCampDto>(c)).ToList();
+            }
+            catch (Exception e)
+            {
+                serviceResponse.Succes = false;
+                serviceResponse.Message = e.Message;
+            }
             return serviceResponse;
         }
 
         public async Task<ServiceResponse<List<GetSailCampDto>>> GetAllSailCamps()
         {
             var serviceResponse = new ServiceResponse<List<GetSailCampDto>>();
-            var camps = await _sailCampRepository.GetAllSailCamps();
-            serviceResponse.Data = camps.Select(c => _mapper.Map<GetSailCampDto>(c)).ToList();
+            try
+            {
+                var camps = await _sailCampRepository.GetAllSailCamps();
+                serviceResponse.Data = camps.Select(c => _mapper.Map<GetSailCampDto>(c)).ToList();
+            }
+            catch (Exception e)
+            {
+                serviceResponse.Succes = false;
+                serviceResponse.Message = e.Message;
+            }
             return serviceResponse;
         }
 
         public async Task<ServiceResponse<GetSailCampDto>> GetSailCapmById(int id)
         {
-           var serviceResponse = new ServiceResponse<GetSailCampDto>();
-           serviceResponse.Data = _mapper.Map<GetSailCampDto>(await _sailCampRepository.GetSailCampById(id));
-           return serviceResponse;
+            var serviceResponse = new ServiceResponse<GetSailCampDto>();
+            try
+            {
+                serviceResponse.Data = _mapper.Map<GetSailCampDto>(await _sailCampRepository.GetSailCampById(id));
+            }
+            catch (Exception e)
+            {
+                serviceResponse.Succes = false;
+                serviceResponse.Message = e.Message;
+            }
+            return serviceResponse;
         }
 
         public async Task<ServiceResponse<List<GetSailCampDto>>> RemoveSailCamp(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetSailCampDto>>();
-            var camps = await _sailCampRepository.RemoveSailcamp(id);
-            serviceResponse.Data = camps.Select(c => _mapper.Map<GetSailCampDto>(c)).ToList();
+            try
+            {
+                var camps = await _sailCampRepository.RemoveSailcamp(id);
+                serviceResponse.Data = camps.Select(c => _mapper.Map<GetSailCampDto>(c)).ToList();
+            }
+            catch (Exception e)
+            {
+                serviceResponse.Succes = false;
+                serviceResponse.Message = e.Message;
+            }
             return serviceResponse;
         }
     }

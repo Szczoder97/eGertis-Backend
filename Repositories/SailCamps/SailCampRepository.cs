@@ -22,7 +22,7 @@ namespace eGertis.Repositories.SailCamps
             return await GetAllSailCamps();
         }
 
-        public async Task<List<SailCamp>> EditSailCamp(SailCamp sailCamp)
+        public async Task<List<SailCamp>> UpdateSailCamp(SailCamp sailCamp)
         {
             var campToEdit = await GetSailCampById(sailCamp.Id);
             campToEdit.Name = sailCamp.Name;

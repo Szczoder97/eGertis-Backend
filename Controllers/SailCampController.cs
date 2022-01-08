@@ -53,9 +53,9 @@ namespace eGertis.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ServiceResponse<List<GetSailCampDto>>>> EditSailCamp(EditSailCampDto sailCampDto)
+        public async Task<ActionResult<ServiceResponse<List<GetSailCampDto>>>> UpdateSailCamp(UpdateSailCampDto sailCampDto)
         {
-            var response = await _sailCampService.EditSailCamp(sailCampDto);
+            var response = await _sailCampService.UpdateSailCamp(sailCampDto);
             if(!response.Succes)
             {
                 return BadRequest(response);
