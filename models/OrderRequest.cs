@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace eGertis.Models
 {
-    public class FinalOrder
+    public class OrderRequest
     {
         public int Id {get; set;}
         public SailCamp SailCamp {get; set;}

@@ -11,5 +11,6 @@ namespace eGertis.Models
         public User Owner {get; set;}
         public DateTime CreationDate {get; set;}
         public List<OrderComponent> Products {get; set;}
+        public bool IsFinale {get; set;}
     }
 }

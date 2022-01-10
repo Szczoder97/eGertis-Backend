@@ -10,6 +10,6 @@ namespace eGertis.Models
         public int Id {get; set;}
         public string Name {get; set;}
         public List<User> Instructors {get; set;}
-        public List<FinalOrder> Orders {get; set;}
+        public List<OrderRequest> Orders {get; set;}
     }
 }

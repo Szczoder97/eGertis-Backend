@@ -16,7 +16,7 @@ namespace eGertis.Data
         public DbSet<Item> Items {get; set;}
         public DbSet<OrderComponent> OrderComponents {get; set;}
         public DbSet<Order> Orders {get; set;}
-        public DbSet<FinalOrder> FinalOrders {get; set;}
+        public DbSet<OrderRequest> OrderRequests {get; set;}
         public DbSet<SailCamp> SailCamps {get; set;}
         public DbSet<User> Users {get; set;}
     }
