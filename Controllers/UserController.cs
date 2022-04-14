@@ -22,7 +22,7 @@ namespace eGertis.Controllers
         public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> GetAllUsers()
         {
             var response = await _userService.GetAllUsers();
-            if(!response.Succes)
+            if(!response.Success)
             {
                 return BadRequest(response);
             }
@@ -32,27 +32,18 @@ namespace eGertis.Controllers
         public async Task<ActionResult<ServiceResponse<GetUserDto>>> GetUserById(int id)
         {
             var response = await _userService.GetUserById(id);
-            if(!response.Succes)
+            if(!response.Success)
             {
                 return BadRequest(response);
             }
             return Ok(response);
         }
-        [HttpGet("free")]
-        public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> GetFreeUsers()
-        {
-            var response = await _userService.GetFreeUsers();
-            if(!response.Succes)
-            {
-                return BadRequest(response);
-            }
-            return Ok(Response);
-        }
+
         [HttpPut]
         public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> ChangeUserRole(ChangeRoleDto dto)
         {
             var response = await _userService.ChangeUserRole(dto);
-            if(!response.Succes)
+            if(!response.Success)
             {
                 return BadRequest(response);
             }
@@ -62,7 +53,7 @@ namespace eGertis.Controllers
         public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> RemoveUser(int id)
         {
             var response = await _userService.RemoveUser(id);
-            if(!response.Succes)
+            if(!response.Success)
             {
                 return BadRequest(response);
             }

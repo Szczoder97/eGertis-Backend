@@ -22,7 +22,7 @@ namespace eGertis.Services.Auth
             var token = await _authRepo.Login(userDto.Email, userDto.Password);
             if(token.Equals(string.Empty))
             {
-                servieResponse.Succes = false;
+                servieResponse.Success = false;
                 servieResponse.Message = "Email and password do not match!";
                 return servieResponse;
             }
@@ -35,7 +35,7 @@ namespace eGertis.Services.Auth
             var serviceResponse = new ServiceResponse<int>();
             if(await _authRepo.UserExists(userDto.Email))
             {
-                serviceResponse.Succes = false;
+                serviceResponse.Success = false;
                 serviceResponse.Message = "User with this email already exists!";
                 return serviceResponse;
             }

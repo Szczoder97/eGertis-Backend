@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using eGertis.Data;
 using eGertis.Models;
-using eGertis.Repositories.FinalOrders;
+using eGertis.Repositories.OrderRequests;
 using Microsoft.EntityFrameworkCore;
 
 namespace eGertis.Repositories.OrderRequests
@@ -18,19 +18,17 @@ namespace eGertis.Repositories.OrderRequests
             _context = context;
         }
 
-        public async Task<List<OrderRequest>> CreateOrderRequest(OrderRequest orderRequest)
+        public async Task CreateOrderRequest(OrderRequest orderRequest)
         {
             _context.OrderRequests.Add(orderRequest);
             await _context.SaveChangesAsync();
-            return await GetOrderRequestsBySailCamp(orderRequest.SailCamp);
         }
 
-        public async Task<List<OrderRequest>> DeactivateOrderRequest(int id)
+        public async Task DeactivateOrderRequest(int id)
         {
             var orderRequest = await GetOrderRequestById(id);
             orderRequest.IsActive = false;
             await _context.SaveChangesAsync();
-            return await GetOrderRequestsBySailCamp(orderRequest.SailCamp);
         }
 
         public async Task<OrderRequest> GetOrderRequestById(int id)
@@ -38,17 +36,16 @@ namespace eGertis.Repositories.OrderRequests
             return await _context.OrderRequests.FirstOrDefaultAsync(o => o.Id == id);
         }
 
-        public async Task<List<OrderRequest>> GetOrderRequestsBySailCamp(SailCamp sailCamp)
+        public async Task<List<OrderRequest>> GetOrderRequests()
         {
-            return await _context.OrderRequests.Where(o => o.SailCamp.Equals(sailCamp)).ToListAsync();
+            return await _context.OrderRequests.ToListAsync();
         }
 
-        public async Task<List<OrderRequest>> RemoveOrderRequest(int id)
+        public async Task RemoveOrderRequest(int id)
         {
             var orderRequest = await GetOrderRequestById(id);
             _context.OrderRequests.Remove(orderRequest);
             await _context.SaveChangesAsync();
-            return await GetOrderRequestsBySailCamp(orderRequest.SailCamp);
         }
     }
 }

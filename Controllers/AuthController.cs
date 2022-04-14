@@ -22,7 +22,7 @@ namespace eGertis.Controllers
         public async Task<ActionResult<ServiceResponse<int>>> Register(RegisterUserDto userDto)
         {
             var response = await _authService.Register(userDto);
-            if(!response.Succes)
+            if(!response.Success)
             {
                 return BadRequest(response);
             }
@@ -32,7 +32,7 @@ namespace eGertis.Controllers
         public async Task<ActionResult<ServiceResponse<string>>> Login(LoginUserDto userDto)
         {
             var response = await _authService.Login(userDto);
-            if(!response.Succes)
+            if(!response.Success)
             {
                 return BadRequest(response);
             }

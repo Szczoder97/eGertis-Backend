@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eGertis.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ItemController : ControllerBase
@@ -22,7 +22,7 @@ namespace eGertis.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetItemDto>>>> AddItem(AddItemDto itemDto)
+        public async Task<ActionResult<ServiceResponse<object>>> AddItem(AddItemDto itemDto)
         {
             return Ok(await _itemServie.AddItem(itemDto));
         }
@@ -39,13 +39,13 @@ namespace eGertis.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ServiceResponse<List<GetItemDto>>>> UpdateItem(UpdateItemDto itemDto)
+        public async Task<ActionResult<ServiceResponse<object>>> UpdateItem(UpdateItemDto itemDto)
         {
             return Ok(await _itemServie.UpdateItem(itemDto));
         }
         
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ServiceResponse<List<GetItemDto>>>> RemoveItem(int id)
+        public async Task<ActionResult<ServiceResponse<object>>> RemoveItem(int id)
         {
             return Ok(await _itemServie.RemoveItem(id));
         }

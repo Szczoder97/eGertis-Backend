@@ -13,8 +13,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Http;
-using eGertis.Repositories.SailCamps;
-using eGertis.Services.SailCamps;
 using eGertis.Repositories.Users;
 using eGertis.Services.Users;
 using eGertis.Repositories.Items;
@@ -64,8 +62,6 @@ namespace eGertis
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<ISailCampRepository, SailCampRepository>();
-            services.AddScoped<ISailCampService, SailCampService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
         }

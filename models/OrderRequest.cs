@@ -8,7 +8,7 @@ namespace eGertis.Models
     public class OrderRequest
     {
         public int Id {get; set;}
-        public SailCamp SailCamp {get; set;}
+        public string Name {get; set;}
         public DateTime CreationDate{get; set;}
         public List<Order> Orders {get; set;}
         public bool IsActive {get; set;}

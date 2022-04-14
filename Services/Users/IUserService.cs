@@ -12,7 +12,6 @@ namespace eGertis.Services.Users
     {
         Task<ServiceResponse<GetUserDto>> GetUserById(int id);
         Task<ServiceResponse<List<GetUserDto>>> GetAllUsers();
-        Task<ServiceResponse<List<GetUserDto>>> GetFreeUsers();
         Task<ServiceResponse<List<GetUserDto>>> ChangeUserRole(ChangeRoleDto dto);
         Task<ServiceResponse<List<GetUserDto>>> RemoveUser(int id);
     }

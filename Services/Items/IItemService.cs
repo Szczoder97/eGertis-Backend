@@ -11,8 +11,8 @@ namespace eGertis.Services.Items
     {
         Task<ServiceResponse<GetItemDto>> GetItem(int id);
         Task<ServiceResponse<List<GetItemDto>>> GetAllItems();
-        Task<ServiceResponse<List<GetItemDto>>> AddItem(AddItemDto itemDto);
-        Task<ServiceResponse<List<GetItemDto>>> UpdateItem(UpdateItemDto itemDto);
-        Task<ServiceResponse<List<GetItemDto>>> RemoveItem(int id);
+        Task<ServiceResponse<object>> AddItem(AddItemDto itemDto);
+        Task<ServiceResponse<object>> UpdateItem(UpdateItemDto itemDto);
+        Task<ServiceResponse<object>> RemoveItem(int id);
     }
 }

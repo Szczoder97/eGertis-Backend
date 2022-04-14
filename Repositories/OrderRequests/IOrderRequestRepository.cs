@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using eGertis.Models;
 
-namespace eGertis.Repositories.FinalOrders
+namespace eGertis.Repositories.OrderRequests
 {
     public interface IOrderRequestRepository
     {
-        Task<List<OrderRequest>> GetOrderRequestsBySailCamp(SailCamp sailCamp);
-        Task<List<OrderRequest>> CreateOrderRequest(OrderRequest orderRequest);
-        Task<List<OrderRequest>> DeactivateOrderRequest(int id);
+        Task<List<OrderRequest>> GetOrderRequests();
+        Task CreateOrderRequest(OrderRequest orderRequest);
+        Task DeactivateOrderRequest(int id);
         Task<OrderRequest> GetOrderRequestById(int id);
-        Task<List<OrderRequest>> RemoveOrderRequest(int id);
+        Task RemoveOrderRequest(int id);
     }
 }

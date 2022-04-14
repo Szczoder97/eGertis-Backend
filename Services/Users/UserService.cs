@@ -30,7 +30,7 @@ namespace eGertis.Services.Users
             }
             catch(Exception e)
             {
-                serviceResponse.Succes = false;
+                serviceResponse.Success = false;
                 serviceResponse.Message = e.Message;
             }
             return serviceResponse;
@@ -46,23 +46,7 @@ namespace eGertis.Services.Users
             }
             catch(Exception e)
             {
-                serviceResponse.Succes = false;
-                serviceResponse.Message = e.Message;
-            }
-            return serviceResponse;
-        }
-
-        public async Task<ServiceResponse<List<GetUserDto>>> GetFreeUsers()
-        {
-            var serviceResponse = new ServiceResponse<List<GetUserDto>>();
-            try
-            {
-                var users = await _userRepository.GetFreeUsers();
-                serviceResponse.Data = users.Select(u => _mapper.Map<GetUserDto>(u)).ToList();
-            }
-            catch(Exception e)
-            {
-                serviceResponse.Succes = false;
+                serviceResponse.Success = false;
                 serviceResponse.Message = e.Message;
             }
             return serviceResponse;
@@ -78,7 +62,7 @@ namespace eGertis.Services.Users
             }
             catch(Exception e)
             {
-                serviceResponse.Succes = false;
+                serviceResponse.Success = false;
                 serviceResponse.Message = e.Message;
             }
             return serviceResponse;
@@ -94,7 +78,7 @@ namespace eGertis.Services.Users
             }
             catch(Exception e)
             {
-                serviceResponse.Succes = false;
+                serviceResponse.Success = false;
                 serviceResponse.Message = e.Message;
             }
             return serviceResponse;

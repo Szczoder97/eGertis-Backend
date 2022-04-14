@@ -11,8 +11,6 @@ namespace eGertis.Repositories.Users
     {
         Task<List<User>> GetAllUsers();
         Task<User> GetUserById(int id);
-        Task<List<User>> GetFreeUsers();
-        Task<List<User>> GetSailCampMembers(SailCamp camp);
         Task<List<User>> ChangeUserRole( int userId, UserRoles role);
         Task<List<User>> RemoveUser(int id);
     }

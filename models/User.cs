@@ -16,7 +16,5 @@ namespace eGertis.Models
         public byte[] PasswordSalt {get; set;}
         public byte[] PasswordHash {get; set;}
         public UserRoles Role {get; set;}
-        public SailCamp SailCamp {get; set;}
-        public List<Order> Orders {get; set;}
     }
 }

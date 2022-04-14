@@ -30,16 +30,6 @@ namespace eGertis.Repositories.Users
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<List<User>> GetFreeUsers()
-        {
-            return await _context.Users.Where(u => u.SailCamp == null && u.Role == UserRoles.Instructor).ToListAsync();
-        }
-
-        public async Task<List<User>> GetSailCampMembers(SailCamp camp)
-        {
-            return await _context.Users.Where(u => u.SailCamp.Equals(camp)).ToListAsync();
-        }
-
         public async Task<User> GetUserById(int id)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
