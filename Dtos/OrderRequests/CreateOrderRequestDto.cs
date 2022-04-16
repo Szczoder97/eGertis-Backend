@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eGertis.Dtos.OrderRequest
+namespace eGertis.Dtos.OrderRequests
 {
     public class CreateOrderRequestDto
     {
-        public int SailCampId {get; set;}
+        public string Name {get; set;}
     }
 }

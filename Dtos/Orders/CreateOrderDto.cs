@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using eGertis.Models;
 
-namespace eGertis.Dtos.Order
+namespace eGertis.Dtos.Orders
 {
     public class CreateOrderDto
     {

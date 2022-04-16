@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using eGertis.Enums;
 
-namespace eGertis.Dtos.User
+namespace eGertis.Dtos.Users
 {
     public class ChangeRoleDto
     {

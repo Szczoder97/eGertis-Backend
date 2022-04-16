@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eGertis.Dtos.Item
+namespace eGertis.Dtos.Orders
 {
-    public class AddItemDto
+    public class UpdateOrderDto
     {
-      public string Name {get; set;}
+        
     }
 }

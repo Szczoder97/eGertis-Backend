@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using eGertis.Dtos.Item;
+using eGertis.Dtos.Items;
 using eGertis.Models;
 using Microsoft.EntityFrameworkCore;
 using eGertis.Repositories.Items;

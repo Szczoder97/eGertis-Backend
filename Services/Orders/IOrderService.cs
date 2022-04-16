@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eGertis.Dtos.Order;
+using eGertis.Dtos.Orders;
 using eGertis.Models;
 
 namespace eGertis.Services.Orders

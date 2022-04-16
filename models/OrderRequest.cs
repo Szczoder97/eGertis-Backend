@@ -9,9 +9,9 @@ namespace eGertis.Models
     {
         public int Id {get; set;}
         public string Name {get; set;}
-        public DateTime CreationDate{get; set;}
+        public DateTime CreationDate{get; set;} = DateTime.Today;
         public List<Order> Orders {get; set;}
-        public bool IsActive {get; set;}
+        public bool IsActive {get; set;} = true;
         
     }
 }
