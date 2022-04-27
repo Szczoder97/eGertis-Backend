@@ -8,10 +8,11 @@ namespace eGertis.Repositories.Orders
 {
     public interface IOrderRepository
     {
-        Task<Order> GetOrderById(int id);
-        Task<List<Order>> GetAllOrders();
-        void CreateOrder(Order order);
-        void UpdateOrder(Order order);
-        void DeleteOrder(int id);
+        Task<Order> GetById(int id);
+        Task<List<Order>> GetAll();
+        void Create(Order order);
+        void Update(Order order);
+        void Delete(int id);
+        void Finalize(int id);
     }
 }

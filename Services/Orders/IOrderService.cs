@@ -9,9 +9,10 @@ namespace eGertis.Services.Orders
 {
     public interface IOrderService
     {
-        Task<ServiceResponse<GetOrderDto>> GetOrderById(int id);
-        Task<ServiceResponse<List<GetOrderDto>>> GetAllOrders();
-        Task<ServiceResponse<GetOrderDto>> CreateOrder(CreateOrderDto dto);
-        Task<ServiceResponse<GetOrderDto>> UpdateOrder();
+        Task<ServiceResponse<GetOrderDto>> GetById(int id);
+        Task<ServiceResponse<List<GetOrderDto>>> GetAll();
+        Task<ServiceResponse<object>> Create();
+        Task<ServiceResponse<object>> Update();
+        Task<ServiceResponse<object>> Finalize(int id);
     }
 }

@@ -10,9 +10,9 @@ namespace eGertis.Services.Users
 {
     public interface IUserService
     {
-        Task<ServiceResponse<GetUserDto>> GetUserById(int id);
-        Task<ServiceResponse<List<GetUserDto>>> GetAllUsers();
-        Task<ServiceResponse<List<GetUserDto>>> ChangeUserRole(ChangeRoleDto dto);
-        Task<ServiceResponse<List<GetUserDto>>> RemoveUser(int id);
+        Task<ServiceResponse<GetUserDto>> GetById(int id);
+        Task<ServiceResponse<List<GetUserDto>>> GetAll();
+        Task<ServiceResponse<List<GetUserDto>>> ChangeRole(ChangeRoleDto dto);
+        Task<ServiceResponse<List<GetUserDto>>> Delete(int id);
     }
 }

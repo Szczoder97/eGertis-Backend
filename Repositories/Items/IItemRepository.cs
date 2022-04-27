@@ -8,10 +8,10 @@ namespace eGertis.Repositories.Items
 {
     public interface IItemRepository
     {
-        Task<Item> GetItemById(int id);
-        Task<List<Item>> GetAllItems();
-        Task AddItem(Item item);
-        Task UpdateItem(Item item);
-        Task RemoveItem(int id);
+        Task<Item> GetById(int id);
+        Task<List<Item>> GetAll();
+        Task Create(Item item);
+        Task Update(Item item);
+        Task Delete(int id);
     }
 }

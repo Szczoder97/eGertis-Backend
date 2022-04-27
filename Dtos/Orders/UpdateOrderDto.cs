@@ -7,6 +7,7 @@ namespace eGertis.Dtos.Orders
 {
     public class UpdateOrderDto
     {
-        
+        public int ID {get; set;}
+
     }
 }

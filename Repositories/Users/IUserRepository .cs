@@ -9,9 +9,9 @@ namespace eGertis.Repositories.Users
 {
     public interface IUserRepository 
     {
-        Task<List<User>> GetAllUsers();
-        Task<User> GetUserById(int id);
-        Task<List<User>> ChangeUserRole( int userId, UserRoles role);
-        Task<List<User>> RemoveUser(int id);
+        Task<List<User>> GetAll();
+        Task<User> GetById(int id);
+        Task<List<User>> ChangeRole( int userId, UserRoles role);
+        Task<List<User>> Delete(int id);
     }
 }

@@ -11,5 +11,6 @@ namespace eGertis.Services.Auth
     {
         Task<ServiceResponse<int>> Register(RegisterUserDto userDto);
         Task<ServiceResponse<string>> Login(LoginUserDto userDto);
+        int GetUserId();
     }
 }

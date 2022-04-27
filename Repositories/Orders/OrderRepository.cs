@@ -17,32 +17,37 @@ namespace eGertis.Repositories.Orders
             _context = context;
         }
 
-        public async void CreateOrder(Order order)
+        public async void Create(Order order)
         {
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
         }
 
-        public async void DeleteOrder(int id)
+        public async void Delete(int id)
         {
-            var order = await GetOrderById(id);
+            var order = await GetById(id);
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Order>> GetAllOrders()
+        public void Finalize(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Order>> GetAll()
         {
             return await _context.Orders.ToListAsync();
         }
 
-        public async Task<Order> GetOrderById(int id)
+        public async Task<Order> GetById(int id)
         {
             return await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
         }
 
-        public async void UpdateOrder(Order order)
+        public async void Update(Order order)
         {
-            var orderToUpdate = await GetOrderById(order.Id);
+            var orderToUpdate = await GetById(order.Id);
             orderToUpdate.Products = order.Products;
             await _context.SaveChangesAsync();
         }

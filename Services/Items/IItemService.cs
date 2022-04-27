@@ -9,10 +9,10 @@ namespace eGertis.Services.Items
 {
     public interface IItemService
     {
-        Task<ServiceResponse<GetItemDto>> GetItem(int id);
-        Task<ServiceResponse<List<GetItemDto>>> GetAllItems();
-        Task<ServiceResponse<object>> AddItem(AddItemDto itemDto);
-        Task<ServiceResponse<object>> UpdateItem(UpdateItemDto itemDto);
-        Task<ServiceResponse<object>> RemoveItem(int id);
+        Task<ServiceResponse<GetItemDto>> GetById(int id);
+        Task<ServiceResponse<List<GetItemDto>>> GetAll();
+        Task<ServiceResponse<object>> Create(AddItemDto itemDto);
+        Task<ServiceResponse<object>> Update(UpdateItemDto itemDto);
+        Task<ServiceResponse<object>> Delete(int id);
     }
 }

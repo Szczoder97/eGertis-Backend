@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 using eGertis.Dtos.Users;
 using eGertis.Models;
 using eGertis.Repositories.Auth;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace eGertis.Services.Auth
 {
     public class AuthService : IAuthService
     {
         private readonly IAuthRepository _authRepo;
-        public AuthService(IAuthRepository authRepo)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public AuthService(IAuthRepository authRepo, IHttpContextAccessor contextAccessor)
         {
             _authRepo = authRepo;
+            _contextAccessor = contextAccessor;
         }
         public async Task<ServiceResponse<string>> Login(LoginUserDto userDto)
         {
@@ -47,5 +51,7 @@ namespace eGertis.Services.Auth
             serviceResponse.Message = $"Created new user with email: {userDto.Email}";
             return serviceResponse;
         }
+
+        public int GetUserId() => int.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
     }
 }

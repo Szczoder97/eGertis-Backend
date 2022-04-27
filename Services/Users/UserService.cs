@@ -20,12 +20,12 @@ namespace eGertis.Services.Users
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<List<GetUserDto>>> ChangeUserRole(ChangeRoleDto dto)
+        public async Task<ServiceResponse<List<GetUserDto>>> ChangeRole(ChangeRoleDto dto)
         {
             var serviceResponse = new ServiceResponse<List<GetUserDto>>();
             try
             {
-                var users = await _userRepository.ChangeUserRole(dto.UserId, dto.Role);
+                var users = await _userRepository.ChangeRole(dto.UserId, dto.Role);
                 serviceResponse.Data = users.Select(u => _mapper.Map<GetUserDto>(u)).ToList();
             }
             catch(Exception e)
@@ -36,12 +36,12 @@ namespace eGertis.Services.Users
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetUserDto>>> GetAllUsers()
+        public async Task<ServiceResponse<List<GetUserDto>>> GetAll()
         {
             var serviceResponse = new ServiceResponse<List<GetUserDto>>();
             try
             {
-                var users = await _userRepository.GetAllUsers();
+                var users = await _userRepository.GetAll();
                 serviceResponse.Data = users.Select(u => _mapper.Map<GetUserDto>(u)).ToList();
             }
             catch(Exception e)
@@ -52,12 +52,12 @@ namespace eGertis.Services.Users
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetUserDto>> GetUserById(int id)
+        public async Task<ServiceResponse<GetUserDto>> GetById(int id)
         {
             var serviceResponse = new ServiceResponse<GetUserDto>();
             try
             {
-                var user = await _userRepository.GetUserById(id);
+                var user = await _userRepository.GetById(id);
                 serviceResponse.Data = _mapper.Map<GetUserDto>(user);
             }
             catch(Exception e)
@@ -68,12 +68,12 @@ namespace eGertis.Services.Users
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetUserDto>>> RemoveUser(int id)
+        public async Task<ServiceResponse<List<GetUserDto>>> Delete(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetUserDto>>();
             try
             {
-                var users = await _userRepository.RemoveUser(id);
+                var users = await _userRepository.Delete(id);
                 serviceResponse.Data = users.Select(u => _mapper.Map<GetUserDto>(u)).ToList();
             }
             catch(Exception e)

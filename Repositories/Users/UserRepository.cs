@@ -17,30 +17,30 @@ namespace eGertis.Repositories.Users
         {
             _context = context;
         }
-        public async Task<List<User>> ChangeUserRole(int userId, UserRoles role)
+        public async Task<List<User>> ChangeRole(int userId, UserRoles role)
         {
-            var user = await GetUserById(userId);
+            var user = await GetById(userId);
             user.Role = role;
             await _context.SaveChangesAsync();
-            return await GetAllUsers();
+            return await GetAll();
         }
 
-        public async Task<List<User>> GetAllUsers()
+        public async Task<List<User>> GetAll()
         {
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetById(int id)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<List<User>> RemoveUser(int id)
+        public async Task<List<User>> Delete(int id)
         {
-            var user = await GetUserById(id);
+            var user = await GetById(id);
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
-            return await GetAllUsers();
+            return await GetAll();
         }
     }
 }

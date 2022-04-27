@@ -19,9 +19,9 @@ namespace eGertis.Controllers
             _userService = userService;
         }
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> GetAllUsers()
+        public async Task<ActionResult> GetAllUsers()
         {
-            var response = await _userService.GetAllUsers();
+            var response = await _userService.GetAll();
             if(!response.Success)
             {
                 return BadRequest(response);
@@ -29,9 +29,9 @@ namespace eGertis.Controllers
             return Ok(response);
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResponse<GetUserDto>>> GetUserById(int id)
+        public async Task<ActionResult> GetUserById(int id)
         {
-            var response = await _userService.GetUserById(id);
+            var response = await _userService.GetById(id);
             if(!response.Success)
             {
                 return BadRequest(response);
@@ -40,9 +40,9 @@ namespace eGertis.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> ChangeUserRole(ChangeRoleDto dto)
+        public async Task<ActionResult> ChangeUserRole(ChangeRoleDto dto)
         {
-            var response = await _userService.ChangeUserRole(dto);
+            var response = await _userService.ChangeRole(dto);
             if(!response.Success)
             {
                 return BadRequest(response);
@@ -50,9 +50,9 @@ namespace eGertis.Controllers
             return Ok(response);
         }
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> RemoveUser(int id)
+        public async Task<ActionResult> RemoveUser(int id)
         {
-            var response = await _userService.RemoveUser(id);
+            var response = await _userService.Delete(id);
             if(!response.Success)
             {
                 return BadRequest(response);

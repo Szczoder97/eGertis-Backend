@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eGertis.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ItemController : ControllerBase
@@ -22,32 +22,32 @@ namespace eGertis.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<object>>> AddItem(AddItemDto itemDto)
+        public async Task<ActionResult> CreateItem(AddItemDto itemDto)
         {
-            return Ok(await _itemServie.AddItem(itemDto));
+            return Ok(await _itemServie.Create(itemDto));
         }
         
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<List<GetItemDto>>>> GetAllItems(){
-            return Ok(await _itemServie.GetAllItems());
+            return Ok(await _itemServie.GetAll());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ServiceResponse<GetItemDto>>> GetItemById(int id)
+        public async Task<ActionResult> GetItemById(int id)
         {
-            return Ok(await _itemServie.GetItem(id));
+            return Ok(await _itemServie.GetById(id));
         }
 
         [HttpPut]
-        public async Task<ActionResult<ServiceResponse<object>>> UpdateItem(UpdateItemDto itemDto)
+        public async Task<ActionResult> UpdateItem(UpdateItemDto itemDto)
         {
-            return Ok(await _itemServie.UpdateItem(itemDto));
+            return Ok(await _itemServie.Update(itemDto));
         }
         
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ServiceResponse<object>>> RemoveItem(int id)
+        public async Task<ActionResult> RemoveItem(int id)
         {
-            return Ok(await _itemServie.RemoveItem(id));
+            return Ok(await _itemServie.Delete(id));
         }
     }
 }

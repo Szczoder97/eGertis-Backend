@@ -16,6 +16,9 @@ using Microsoft.AspNetCore.Http;
 using eGertis.Repositories.Users;
 using eGertis.Services.Users;
 using eGertis.Repositories.Items;
+using eGertis.Repositories.Orders;
+using eGertis.Services.Orders;
+using eGertis.Repositories.ItemWrappers;
 
 namespace eGertis
 {
@@ -64,6 +67,10 @@ namespace eGertis
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IItemWrapperRepository, ItemWrapperRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

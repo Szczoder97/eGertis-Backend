@@ -1,6 +1,6 @@
 using AutoMapper;
 using eGertis.Dtos.Items;
-using eGertis.Dtos.OrderRequests;
+using eGertis.Dtos.ItemWrappers;
 using eGertis.Dtos.Users;
 using eGertis.Models;
 
@@ -12,9 +12,11 @@ namespace eGertis
         {
             CreateMap<AddItemDto, Item>();
             CreateMap<Item, GetItemDto>();
+            CreateMap<GetItemDto, Item>();
             CreateMap<UpdateItemDto, Item>();
             CreateMap<User, GetUserDto>();
-            CreateMap<OrderRequest, GetOrderRequestDto>();
+            CreateMap<GetUserDto, User>();
+            CreateMap<CreateItemWrapperDto, ItemWrapper>();
         }
     }
 }
