@@ -18,6 +18,7 @@ namespace eGertis.Controllers
         {
             _userService = userService;
         }
+        
         [HttpGet]
         public async Task<ActionResult> GetAllUsers()
         {
@@ -28,6 +29,7 @@ namespace eGertis.Controllers
             }
             return Ok(response);
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult> GetUserById(int id)
         {
@@ -40,19 +42,20 @@ namespace eGertis.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> ChangeUserRole(ChangeRoleDto dto)
+        public ActionResult ChangeUserRole(ChangeRoleDto dto)
         {
-            var response = await _userService.ChangeRole(dto);
+            var response = _userService.ChangeRole(dto);
             if(!response.Success)
             {
                 return BadRequest(response);
             }
             return Ok(response);
         }
+
         [HttpDelete("{id}")]
-        public async Task<ActionResult> RemoveUser(int id)
+        public ActionResult RemoveUser(int id)
         {
-            var response = await _userService.Delete(id);
+            var response =  _userService.Delete(id);
             if(!response.Success)
             {
                 return BadRequest(response);
