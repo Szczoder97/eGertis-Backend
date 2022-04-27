@@ -34,7 +34,7 @@ namespace eGertis.Services.Orders
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceResponse<object>> Finalize(int id)
+        public ServiceResponse<object> Finalize(int id)
         {
             var serviceResponse = new ServiceResponse<object>();
             try

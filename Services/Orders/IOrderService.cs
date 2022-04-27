@@ -13,6 +13,6 @@ namespace eGertis.Services.Orders
         Task<ServiceResponse<List<GetOrderDto>>> GetAll();
         Task<ServiceResponse<object>> Create();
         Task<ServiceResponse<object>> Update();
-        Task<ServiceResponse<object>> Finalize(int id);
+        ServiceResponse<object> Finalize(int id);
     }
 }
