@@ -20,13 +20,13 @@ namespace eGertis.Services.Users
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<List<GetUserDto>>> ChangeRole(ChangeRoleDto dto)
+        public ServiceResponse<List<GetUserDto>> ChangeRole(ChangeRoleDto dto)
         {
             var serviceResponse = new ServiceResponse<List<GetUserDto>>();
             try
             {
-                var users = await _userRepository.ChangeRole(dto.UserId, dto.Role);
-                serviceResponse.Data = users.Select(u => _mapper.Map<GetUserDto>(u)).ToList();
+                _userRepository.ChangeRole(dto.UserId, dto.Role);
+        
             }
             catch(Exception e)
             {
@@ -68,13 +68,13 @@ namespace eGertis.Services.Users
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetUserDto>>> Delete(int id)
+        public ServiceResponse<List<GetUserDto>> Delete(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetUserDto>>();
             try
             {
-                var users = await _userRepository.Delete(id);
-                serviceResponse.Data = users.Select(u => _mapper.Map<GetUserDto>(u)).ToList();
+                _userRepository.Delete(id);
+                
             }
             catch(Exception e)
             {

@@ -12,7 +12,7 @@ namespace eGertis.Services.Users
     {
         Task<ServiceResponse<GetUserDto>> GetById(int id);
         Task<ServiceResponse<List<GetUserDto>>> GetAll();
-        Task<ServiceResponse<List<GetUserDto>>> ChangeRole(ChangeRoleDto dto);
-        Task<ServiceResponse<List<GetUserDto>>> Delete(int id);
+        ServiceResponse<List<GetUserDto>> ChangeRole(ChangeRoleDto dto);
+        ServiceResponse<List<GetUserDto>> Delete(int id);
     }
 }

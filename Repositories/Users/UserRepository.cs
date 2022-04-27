@@ -17,12 +17,11 @@ namespace eGertis.Repositories.Users
         {
             _context = context;
         }
-        public async Task<List<User>> ChangeRole(int userId, UserRoles role)
+        public async void ChangeRole(int userId, UserRoles role)
         {
             var user = await GetById(userId);
             user.Role = role;
             await _context.SaveChangesAsync();
-            return await GetAll();
         }
 
         public async Task<List<User>> GetAll()
@@ -35,12 +34,11 @@ namespace eGertis.Repositories.Users
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<List<User>> Delete(int id)
+        public async void Delete(int id)
         {
             var user = await GetById(id);
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
-            return await GetAll();
         }
     }
 }
