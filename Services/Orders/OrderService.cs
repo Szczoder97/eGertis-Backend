@@ -10,6 +10,7 @@ using eGertis.Repositories.Orders;
 using Microsoft.AspNetCore.Http;
 using eGertis.Services.Auth;
 using eGertis.Services.Users;
+using eGertis.Repositories.Users;
 
 namespace eGertis.Services.Orders
 {
@@ -17,21 +18,27 @@ namespace eGertis.Services.Orders
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IAuthService _authService;
-        private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly IUserRepository _userRepoitory;
 
 
-        public OrderService(IOrderRepository orderRepository, IMapper mapper, IAuthService authService, IUserService userService)
+        public OrderService(IOrderRepository orderRepository, IMapper mapper, IAuthService authService, IUserService userService, IUserRepository userRepoitory)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
             _authService = authService;
-            _userService = userService;
+            _userRepoitory = userRepoitory;
         }
 
-        public Task<ServiceResponse<object>> Create()
+        public async Task<ServiceResponse<Order>> Create(string title)
         {
-            throw new NotImplementedException();
+            var serviceResponse = new ServiceResponse<Order>();
+            var order = new Order();
+            order.Title = title;
+            var owner = await _userRepoitory.GetById(_authService.GetUserId());
+            order.Owner = owner;
+            serviceResponse.Data = await _orderRepository.Create(order);
+            return serviceResponse; 
         }
 
         public ServiceResponse<object> Finalize(int id)

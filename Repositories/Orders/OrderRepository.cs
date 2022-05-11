@@ -17,10 +17,11 @@ namespace eGertis.Repositories.Orders
             _context = context;
         }
 
-        public async void Create(Order order)
+        public async Task<Order> Create(Order order)
         {
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
+            return order;
         }
 
         public async void Delete(int id)

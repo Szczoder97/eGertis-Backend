@@ -10,7 +10,7 @@ namespace eGertis.Repositories.Orders
     {
         Task<Order> GetById(int id);
         Task<List<Order>> GetAll();
-        void Create(Order order);
+        Task<Order> Create(Order order);
         void Update(Order order);
         void Delete(int id);
         void Finalize(int id);
