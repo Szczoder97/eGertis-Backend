@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eGertis.Dtos.Users;
-using eGertis.Enums;
 using eGertis.Models;
 
 namespace eGertis.Services.Users
@@ -12,7 +11,7 @@ namespace eGertis.Services.Users
     {
         Task<ServiceResponse<GetUserDto>> GetById(int id);
         Task<ServiceResponse<List<GetUserDto>>> GetAll();
-        ServiceResponse<List<GetUserDto>> ChangeRole(ChangeRoleDto dto);
-        ServiceResponse<List<GetUserDto>> Delete(int id);
+        Task<ServiceResponse<GetUserDto>> ChangeRole(ChangeRoleDto dto);
+        Task<ServiceResponse<List<GetUserDto>>> Delete(int id);
     }
 }

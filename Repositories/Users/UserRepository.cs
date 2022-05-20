@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eGertis.Data;
-using eGertis.Enums;
 using eGertis.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +16,7 @@ namespace eGertis.Repositories.Users
         {
             _context = context;
         }
-        public async Task<User> ChangeRole(int userId, UserRoles role)
+        public async Task<User> ChangeRole(int userId, string role)
         {
             var user = await GetById(userId);
             user.Role = role;

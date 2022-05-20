@@ -4,8 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using eGertis.Constants;
 using eGertis.Data;
-using eGertis.Enums;
 using eGertis.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -45,7 +45,7 @@ namespace eGertis.Repositories.Auth
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            user.Role = UserRoles.New;
+            user.Role = UserRole.NewUser;
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user.Id;

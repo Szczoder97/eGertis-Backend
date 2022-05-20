@@ -9,6 +9,7 @@ using eGertis.Repositories.Auth;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
+
 namespace eGertis.Services.Auth
 {
     public class AuthService : IAuthService
@@ -53,5 +54,10 @@ namespace eGertis.Services.Auth
         }
 
         public int GetUserId() => int.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+        public string GetUserRole()
+        {
+            return _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
+        }
     }
 }

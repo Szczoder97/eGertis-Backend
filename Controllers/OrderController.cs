@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using eGertis.Constants;
 using eGertis.Dtos.Orders;
 using eGertis.Services.Orders;
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eGertis.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = UserRole.VerifiedUser)]
     [ApiController]
     [Route("[controller]")]
     public class OrderController : ControllerBase
@@ -36,7 +37,7 @@ namespace eGertis.Controllers
             return Ok(response);
         }
 
-
+        [Authorize(Roles = UserRole.SupplyWorker)]
         [HttpGet("{id}/realize")]
         public async Task<ActionResult> Realize(int id)
         {

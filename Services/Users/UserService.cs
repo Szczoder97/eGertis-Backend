@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using eGertis.Dtos.Users;
-using eGertis.Enums;
 using eGertis.Models;
 using eGertis.Repositories.Users;
 
@@ -20,12 +19,13 @@ namespace eGertis.Services.Users
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        public ServiceResponse<List<GetUserDto>> ChangeRole(ChangeRoleDto dto)
+        public async Task<ServiceResponse<GetUserDto>> ChangeRole(ChangeRoleDto dto)
         {
-            var serviceResponse = new ServiceResponse<List<GetUserDto>>();
+            var serviceResponse = new ServiceResponse<GetUserDto>();
             try
             {
-                _userRepository.ChangeRole(dto.UserId, dto.Role);
+                var user = _mapper.Map<GetUserDto>(await _userRepository.ChangeRole(dto.UserId, dto.Role));
+                serviceResponse.Data = user;
                 serviceResponse.Message = "Role has been changed!";
         
             }
@@ -69,13 +69,14 @@ namespace eGertis.Services.Users
             return serviceResponse;
         }
 
-        public ServiceResponse<List<GetUserDto>> Delete(int id)
+        public async Task<ServiceResponse<List<GetUserDto>>> Delete(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetUserDto>>();
             try
             {
-                _userRepository.Delete(id);
-                
+                var users = await _userRepository.Delete(id);
+                serviceResponse.Data = users.Select(user => _mapper.Map<GetUserDto>(user)).ToList();
+                serviceResponse.Message = "User with id: " + id + " deleted!";
             }
             catch(Exception e)
             {

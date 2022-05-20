@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eGertis.Enums;
 
 
 namespace eGertis.Models
@@ -15,6 +14,6 @@ namespace eGertis.Models
         public string Surname {get; set;}
         public byte[] PasswordSalt {get; set;}
         public byte[] PasswordHash {get; set;}
-        public UserRoles Role {get; set;}
+        public string Role {get; set;}
     }
 }

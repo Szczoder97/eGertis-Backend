@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eGertis.Enums;
 using eGertis.Models;
 
 namespace eGertis.Repositories.Users
@@ -11,7 +10,7 @@ namespace eGertis.Repositories.Users
     {
         Task<List<User>> GetAll();
         Task<User> GetById(int id);
-        Task<User> ChangeRole( int userId, UserRoles role);
+        Task<User> ChangeRole( int userId, string role);
         Task<List<User>> Delete(int id);
     }
 }

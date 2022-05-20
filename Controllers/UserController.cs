@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using eGertis.Constants;
 using eGertis.Dtos.Users;
-using eGertis.Models;
 using eGertis.Services.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eGertis.Controllers
 {
+    [Authorize(Roles = UserRole.Administrator)]
     [ApiController]
     [Route("[controller]")]
     public class UserController : ControllerBase
@@ -42,9 +44,9 @@ namespace eGertis.Controllers
         }
 
         [HttpPut]
-        public ActionResult ChangeUserRole(ChangeRoleDto dto)
+        public async Task<ActionResult> ChangeUserRole(ChangeRoleDto dto)
         {
-            var response = _userService.ChangeRole(dto);
+            var response = await _userService.ChangeRole(dto);
             if(!response.Success)
             {
                 return BadRequest(response);
@@ -53,9 +55,9 @@ namespace eGertis.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult RemoveUser(int id)
+        public async Task<ActionResult> RemoveUser(int id)
         {
-            var response =  _userService.Delete(id);
+            var response = await _userService.Delete(id);
             if(!response.Success)
             {
                 return BadRequest(response);

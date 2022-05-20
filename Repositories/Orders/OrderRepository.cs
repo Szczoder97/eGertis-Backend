@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using eGertis.Constants;
 using eGertis.Data;
 using eGertis.Dtos.Orders;
 using eGertis.Models;
+using eGertis.Repositories.Users;
+using eGertis.Services.Auth;
 using Microsoft.EntityFrameworkCore;
 
 namespace eGertis.Repositories.Orders
@@ -12,10 +15,14 @@ namespace eGertis.Repositories.Orders
     public class OrderRepository : IOrderRepository
     {
         private readonly DataContext _context;
+        private readonly IAuthService _authService;
+        private readonly IUserRepository _userRepository;
 
-        public OrderRepository(DataContext context)
+        public OrderRepository(DataContext context, IAuthService authService, IUserRepository userRepository)
         {
             _context = context;
+            _authService = authService;
+            _userRepository = userRepository;
         }
 
         public async Task<Order> Create(Order order)
@@ -35,7 +42,12 @@ namespace eGertis.Repositories.Orders
         }
         public async Task<List<Order>> GetAll()
         {
-            return await _context.Orders.ToListAsync();
+            if(_authService.GetUserRole().Equals(UserRole.SupplyWorker))
+            {
+                return await _context.Orders.ToListAsync();
+            }
+            var user = await _userRepository.GetById(_authService.GetUserId());
+            return await _context.Orders.Where(order => order.Owner.Equals(user)).ToListAsync();
         }
 
         public async Task<Order> GetById(int id)
