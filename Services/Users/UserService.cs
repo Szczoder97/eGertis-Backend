@@ -26,6 +26,7 @@ namespace eGertis.Services.Users
             try
             {
                 _userRepository.ChangeRole(dto.UserId, dto.Role);
+                serviceResponse.Message = "Role has been changed!";
         
             }
             catch(Exception e)

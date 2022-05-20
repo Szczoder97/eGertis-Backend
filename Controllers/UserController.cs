@@ -62,6 +62,6 @@ namespace eGertis.Controllers
             }
             return Ok(response);
         }
-        
+              
     }
 }

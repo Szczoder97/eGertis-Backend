@@ -11,7 +11,7 @@ namespace eGertis.Repositories.ItemWrappers
         Task<ItemWrapper> GetById(int id);
         Task<List<ItemWrapper>> GetAll();
         Task<ItemWrapper> Create(ItemWrapper itemWrapper);
-        void Update(ItemWrapper itemWrapper);
-        void Delete(int id);
+        Task<ItemWrapper> Update(ItemWrapper itemWrapper);
+        Task<List<ItemWrapper>> Delete(int id);
     }
 }

@@ -11,7 +11,7 @@ namespace eGertis.Repositories.Users
     {
         Task<List<User>> GetAll();
         Task<User> GetById(int id);
-        void ChangeRole( int userId, UserRoles role);
-        void Delete(int id);
+        Task<User> ChangeRole( int userId, UserRoles role);
+        Task<List<User>> Delete(int id);
     }
 }

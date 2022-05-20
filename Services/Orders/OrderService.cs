@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using eGertis.Services.Auth;
 using eGertis.Services.Users;
 using eGertis.Repositories.Users;
+using eGertis.Repositories.ItemWrappers;
 
 namespace eGertis.Services.Orders
 {
@@ -20,14 +21,16 @@ namespace eGertis.Services.Orders
         private readonly IAuthService _authService;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepoitory;
+        private readonly IItemWrapperRepository _itemWrapperRepository;
 
 
-        public OrderService(IOrderRepository orderRepository, IMapper mapper, IAuthService authService, IUserService userService, IUserRepository userRepoitory)
+        public OrderService(IOrderRepository orderRepository, IMapper mapper, IAuthService authService, IUserService userService, IUserRepository userRepoitory, IItemWrapperRepository itemWrapperRepository)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
             _authService = authService;
             _userRepoitory = userRepoitory;
+            _itemWrapperRepository = itemWrapperRepository;
         }
 
         public async Task<ServiceResponse<Order>> Create(string title)
@@ -41,28 +44,15 @@ namespace eGertis.Services.Orders
             return serviceResponse; 
         }
 
-        public ServiceResponse<object> Finalize(int id)
-        {
-            var serviceResponse = new ServiceResponse<object>();
-            try
-            {
-                _orderRepository.Finalize(id);
-            }
-            catch(Exception e) 
-            {
-                serviceResponse.Success = false;
-                serviceResponse.Message = e.Message;
-            }
-            return serviceResponse;
-        }
 
-        public async Task<ServiceResponse<List<GetOrderDto>>> GetAll()
+        public async Task<ServiceResponse<List<Order>>> GetAll()
         {
-            var serviceResponse = new ServiceResponse<List<GetOrderDto>>();
+            var serviceResponse = new ServiceResponse<List<Order>>();
             try 
             {
                 var orders = await _orderRepository.GetAll();
-                serviceResponse.Data = orders.Select(order => _mapper.Map<GetOrderDto>(order)).ToList();
+                serviceResponse.Data = orders;
+                    //orders.Select(order => _mapper.Map<GetOrderDto>(order)).ToList();
             }
             catch(Exception e) 
             {
@@ -72,13 +62,14 @@ namespace eGertis.Services.Orders
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetOrderDto>> GetById(int id)
+        public async Task<ServiceResponse<Order>> GetById(int id)
         {
-            var serviceResponse = new ServiceResponse<GetOrderDto>();
+            var serviceResponse = new ServiceResponse<Order>();
             try 
             {
                 var order = await _orderRepository.GetById(id);
-                serviceResponse.Data = _mapper.Map<GetOrderDto>(order);
+                serviceResponse.Data = order;
+                    //_mapper.Map<GetOrderDto>(order);
             }
             catch(Exception e)
             {
@@ -88,9 +79,42 @@ namespace eGertis.Services.Orders
             return serviceResponse;
         }
 
-        public Task<ServiceResponse<object>> Update()
+        public async Task<ServiceResponse<Order>> Realize(int id)
         {
-            throw new NotImplementedException();
+            var serviceResponse = new ServiceResponse<Order>();
+            try
+            {
+                serviceResponse.Data = await _orderRepository.Realize(id);
+                serviceResponse.Message = "Order: " + id + " realized!";
+            }
+            catch(Exception e)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = e.Message;
+            }
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<object>> Update(int id, UpdateOrderDto dto)
+        {
+            var serviceResponse = new ServiceResponse<object>();
+            try
+            {
+                var productsToSave = dto.Products.Select(prod => _mapper.Map<ItemWrapper>(prod)).ToList();
+                var productsToUpdate = new List<ItemWrapper>();
+                foreach (var product in productsToSave)
+                {
+                    productsToUpdate.Add(await _itemWrapperRepository.Create(product));
+                }
+                serviceResponse.Data = await _orderRepository.Update(id, dto.Title, productsToUpdate );
+                serviceResponse.Message = "Saved " + productsToSave.Count + " items!";
+            }
+            catch(Exception e)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = e.Message;
+            }
+            return serviceResponse;
         }
     }
 }

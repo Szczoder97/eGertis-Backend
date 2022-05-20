@@ -1,3 +1,4 @@
+using eGertis.Dtos.ItemWrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ namespace eGertis.Dtos.Orders
 {
     public class UpdateOrderDto
     {
-        public int ID {get; set;}
+        public string Title { get; set; }
+        public List<CreateItemWrapperDto> Products { get; set; }
 
     }
 }

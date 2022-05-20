@@ -24,11 +24,12 @@ namespace eGertis.Repositories.ItemWrappers
             return  itemWrapper;
         }
 
-        public async void Delete(int id)
+        public async Task<List<ItemWrapper>> Delete(int id)
         {
             var itemWrapper = await GetById(id);
             _context.ItemWrappers.Remove(itemWrapper);
             await _context.SaveChangesAsync();
+            return await GetAll();
         }
 
         public async Task<List<ItemWrapper>> GetAll()
@@ -41,11 +42,12 @@ namespace eGertis.Repositories.ItemWrappers
             return await _context.ItemWrappers.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async void Update(ItemWrapper itemWrapper)
+        public async Task<ItemWrapper> Update(ItemWrapper itemWrapper)
         {
             var wrapperToUpdate = await GetById(itemWrapper.Id);
             wrapperToUpdate.Quantity = itemWrapper.Quantity;
             await _context.SaveChangesAsync();
+            return wrapperToUpdate;
         }
     }
 }

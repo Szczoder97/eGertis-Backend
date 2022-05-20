@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eGertis.Data;
+using eGertis.Dtos.Orders;
 using eGertis.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,23 +20,19 @@ namespace eGertis.Repositories.Orders
 
         public async Task<Order> Create(Order order)
         {
+            order.CreationDate = DateTime.Now;
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
             return order;
         }
 
-        public async void Delete(int id)
+        public async Task<List<Order>> Delete(int id)
         {
             var order = await GetById(id);
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
+            return await GetAll();
         }
-
-        public void Finalize(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<Order>> GetAll()
         {
             return await _context.Orders.ToListAsync();
@@ -43,14 +40,28 @@ namespace eGertis.Repositories.Orders
 
         public async Task<Order> GetById(int id)
         {
-            return await _context.Orders.FirstOrDefaultAsync(o => o.Id == id);
+            return await _context.Orders.Include(order => order.Owner)
+                .Include(order => order.Products).FirstOrDefaultAsync(o => o.Id == id);
         }
 
-        public async void Update(Order order)
+        public async Task<List<Order>> Update(int orderId, string title, List<ItemWrapper> products)
         {
-            var orderToUpdate = await GetById(order.Id);
-            orderToUpdate.Products = order.Products;
+            var orderToUpdate = await GetById(orderId);
+            orderToUpdate.Title = title;
+            foreach(var product in products)
+            {
+                orderToUpdate.Products.Add(product);
+            }
             await _context.SaveChangesAsync();
+            return await GetAll();
+        }
+
+        public async Task<Order> Realize(int id)
+        {
+            var order = await GetById(id);
+            order.IsRealized = true;
+            await _context.SaveChangesAsync();
+            return order;
         }
     }
 }

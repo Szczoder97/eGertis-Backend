@@ -1,3 +1,4 @@
+using eGertis.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,11 @@ namespace eGertis.Dtos.Orders
 {
     public class GetOrderDto
     {
-        
+        public int Id { get; set; }
+        public User Owner { get; set; }
+        public string Title { get; set; }
+        public DateTime CreationDate { get; set; }
+        public List<ItemWrapper> Products { get; set; }
+        public bool IsRealized { get; set; } = false;
     }
 }
