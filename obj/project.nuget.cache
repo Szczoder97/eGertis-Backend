@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3kTgd9M/70T74wfmqWi5wW8QYLYZiVjRMHy7MJg0jXddoVSDVY1tWU8poAV1ZU+nXy6e7evwwT4dtNsw53qGyQ==",
+  "dgSpecHash": "0iPuNoqZk9xYkC98GXZaMm71vzOMbqjTR0gMXfynkQJD/ecfx1hbzWANRVIoOVZeFW9koHaUVOOCZotezkGxRg==",
   "success": true,
   "projectFilePath": "E:\\studia\\lic\\projekt\\eGertis\\eGertis.csproj",
   "expectedPackageFiles": [
@@ -118,8 +118,7 @@
     "C:\\Users\\hp\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\hp\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\hp\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.14\\microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512"
+    "C:\\Users\\hp\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }
