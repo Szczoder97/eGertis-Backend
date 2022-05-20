@@ -33,26 +33,26 @@ namespace eGertis.Services.Orders
             _itemWrapperRepository = itemWrapperRepository;
         }
 
-        public async Task<ServiceResponse<Order>> Create(string title)
+        public async Task<ServiceResponse<GetOrderDto>> Create(string title)
         {
-            var serviceResponse = new ServiceResponse<Order>();
+            var serviceResponse = new ServiceResponse<GetOrderDto>();
             var order = new Order();
             order.Title = title;
             var owner = await _userRepoitory.GetById(_authService.GetUserId());
             order.Owner = owner;
-            serviceResponse.Data = await _orderRepository.Create(order);
+            var data = await _orderRepository.Create(order);
+            serviceResponse.Data = new GetOrderDto(data);
             return serviceResponse; 
         }
 
 
-        public async Task<ServiceResponse<List<Order>>> GetAll()
+        public async Task<ServiceResponse<List<GetOrderDto>>> GetAll()
         {
-            var serviceResponse = new ServiceResponse<List<Order>>();
+            var serviceResponse = new ServiceResponse<List<GetOrderDto>>();
             try 
             {
-                var orders = await _orderRepository.GetAll();
-                serviceResponse.Data = orders;
-                    //orders.Select(order => _mapper.Map<GetOrderDto>(order)).ToList();
+                var orders = await _orderRepository.GetAll(); 
+                serviceResponse.Data = GetOrderDtos(orders);
             }
             catch(Exception e) 
             {
@@ -62,14 +62,13 @@ namespace eGertis.Services.Orders
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<Order>> GetById(int id)
+        public async Task<ServiceResponse<GetOrderDto>> GetById(int id)
         {
-            var serviceResponse = new ServiceResponse<Order>();
+            var serviceResponse = new ServiceResponse<GetOrderDto>();
             try 
             {
                 var order = await _orderRepository.GetById(id);
-                serviceResponse.Data = order;
-                    //_mapper.Map<GetOrderDto>(order);
+                serviceResponse.Data = new GetOrderDto(order);
             }
             catch(Exception e)
             {
@@ -79,12 +78,13 @@ namespace eGertis.Services.Orders
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<Order>> Realize(int id)
+        public async Task<ServiceResponse<GetOrderDto>> Realize(int id)
         {
-            var serviceResponse = new ServiceResponse<Order>();
+            var serviceResponse = new ServiceResponse<GetOrderDto>();
             try
             {
-                serviceResponse.Data = await _orderRepository.Realize(id);
+                var order = await _orderRepository.Realize(id);
+                serviceResponse.Data = new GetOrderDto(order);
                 serviceResponse.Message = "Order: " + id + " realized!";
             }
             catch(Exception e)
@@ -95,9 +95,9 @@ namespace eGertis.Services.Orders
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<object>> Update(int id, UpdateOrderDto dto)
+        public async Task<ServiceResponse<List<GetOrderDto>>> Update(int id, UpdateOrderDto dto)
         {
-            var serviceResponse = new ServiceResponse<object>();
+            var serviceResponse = new ServiceResponse<List<GetOrderDto>>();
             try
             {
                 var productsToSave = dto.Products.Select(prod => _mapper.Map<ItemWrapper>(prod)).ToList();
@@ -106,7 +106,8 @@ namespace eGertis.Services.Orders
                 {
                     productsToUpdate.Add(await _itemWrapperRepository.Create(product));
                 }
-                serviceResponse.Data = await _orderRepository.Update(id, dto.Title, productsToUpdate );
+                var orders = await _orderRepository.Update(id, dto.Title, productsToUpdate);
+                serviceResponse.Data = GetOrderDtos(orders);
                 serviceResponse.Message = "Saved " + productsToSave.Count + " items!";
             }
             catch(Exception e)
@@ -115,6 +116,16 @@ namespace eGertis.Services.Orders
                 serviceResponse.Message = e.Message;
             }
             return serviceResponse;
+        }
+
+        private List<GetOrderDto> GetOrderDtos(List<Order> orders)
+        {
+            var data = new List<GetOrderDto>();
+                foreach(var order in orders)
+                {
+                    data.Add(new GetOrderDto(order));
+                }
+            return data;
         }
     }
 }
