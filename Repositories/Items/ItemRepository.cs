@@ -17,10 +17,12 @@ namespace eGertis.Repositories.Items
             _context = context;
         }
 
-        public async Task Create(Item item)
+        public async Task<List<Item>> Create(Item item)
         {
             _context.Items.Add(item);
             await _context.SaveChangesAsync();
+            return await GetAll();
+
         }
 
         public async Task<List<Item>> GetAll()
@@ -33,18 +35,20 @@ namespace eGertis.Repositories.Items
             return await _context.Items.FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task Delete(int id)
+        public async Task<List<Item>> Delete(int id)
         {
             var item = await GetById(id);
             _context.Items.Remove(item);
             await _context.SaveChangesAsync();
+            return await GetAll();
         }
 
-        public async Task Update(Item item)
+        public async Task<List<Item>> Update(Item item)
         {
             var itemToEdit = await GetById(item.Id);
             itemToEdit.Name = item.Name;
             await _context.SaveChangesAsync();
+            return await GetAll();
         }
     }
 }

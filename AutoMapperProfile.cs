@@ -12,9 +12,6 @@ namespace eGertis
         public AutoMapperProfile()
         {
             CreateMap<AddItemDto, Item>();
-            CreateMap<Item, GetItemDto>();
-            CreateMap<GetItemDto, Item>();
-            CreateMap<UpdateItemDto, Item>();
             CreateMap<User, GetUserDto>();
             CreateMap<GetUserDto, User>();
             CreateMap<CreateItemWrapperDto, ItemWrapper>();

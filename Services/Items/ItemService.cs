@@ -20,13 +20,14 @@ namespace eGertis.Services.Items
             _itemRepository = itemRepository;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<object>> Create(AddItemDto itemDto)
+        public async Task<ServiceResponse<List<Item>>> Create(AddItemDto itemDto)
         {
-            var serviceResponse = new ServiceResponse<object>();
+            var serviceResponse = new ServiceResponse<List<Item>>();
             var item = _mapper.Map<Item>(itemDto);
             try
             {
-                await _itemRepository.Create(item);  
+                serviceResponse.Data = await _itemRepository.Create(item);
+                serviceResponse.Message = "Item add: " + item.Name;
             }
             catch(Exception e)
             {
@@ -36,12 +37,12 @@ namespace eGertis.Services.Items
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<object>> Delete(int id)
+        public async Task<ServiceResponse<List<Item>>> Delete(int id)
         {
-            var serviceResponse = new ServiceResponse<object>();
+            var serviceResponse = new ServiceResponse<List<Item>>();
             try
             {
-                await _itemRepository.Delete(id);
+                serviceResponse.Data = await _itemRepository.Delete(id);
             }
             catch(Exception e)
             {
@@ -51,13 +52,12 @@ namespace eGertis.Services.Items
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetItemDto>>> GetAll()
+        public async Task<ServiceResponse<List<Item>>> GetAll()
         {
-            var serviceResponse = new ServiceResponse<List<GetItemDto>>();
+            var serviceResponse = new ServiceResponse<List<Item>>();
             try
             {
-                var items = await _itemRepository.GetAll();
-                serviceResponse.Data = items.Select(i => _mapper.Map<GetItemDto>(i)).ToList();
+                serviceResponse.Data = await _itemRepository.GetAll();
             }
             catch(Exception e)
             {
@@ -67,13 +67,12 @@ namespace eGertis.Services.Items
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetItemDto>> GetById(int id)
+        public async Task<ServiceResponse<Item>> GetById(int id)
         {
-            var serviceResponse = new ServiceResponse<GetItemDto>();
+            var serviceResponse = new ServiceResponse<Item>();
             try
             {
-                var item = await _itemRepository.GetById(id);
-                serviceResponse.Data = _mapper.Map<GetItemDto>(item);
+                serviceResponse.Data = await _itemRepository.GetById(id);
             }
             catch(Exception e)
             {
@@ -83,13 +82,12 @@ namespace eGertis.Services.Items
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<object>> Update(UpdateItemDto itemDto)
+        public async Task<ServiceResponse<List<Item>>> Update(Item item)
         {
-            var serviceResponse = new ServiceResponse<object>();
+            var serviceResponse = new ServiceResponse<List<Item>>();
             try
             {
-                var item = _mapper.Map<Item>(itemDto);
-                await _itemRepository.Update(item);
+                serviceResponse.Data = await _itemRepository.Update(item);
             }
             catch(Exception e)
             {
