@@ -30,7 +30,7 @@ namespace eGertis.Controllers
 
         [Authorize(Roles = UserRole.VerifiedUser)]
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<GetItemDto>>>> GetAllItems(){
+        public async Task<ActionResult<ServiceResponse<List<Item>>>> GetAllItems(){
             return Ok(await _itemService.GetAll());
         }
 
@@ -43,9 +43,9 @@ namespace eGertis.Controllers
 
         [Authorize(Roles = UserRole.Administrator)]
         [HttpPut]
-        public async Task<ActionResult> UpdateItem(UpdateItemDto itemDto)
+        public async Task<ActionResult> UpdateItem(Item item)
         {
-            return Ok(await _itemService.Update(itemDto));
+            return Ok(await _itemService.Update(item));
         }
 
         [Authorize(Roles = UserRole.Administrator)]
