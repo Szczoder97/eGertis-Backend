@@ -11,8 +11,9 @@ namespace eGertis.Services.Orders
     {
         Task<ServiceResponse<GetOrderDto>> GetById(int id);
         Task<ServiceResponse<List<GetOrderDto>>> GetAll();
-        Task<ServiceResponse<GetOrderDto>> Create(string title);
+        Task<ServiceResponse<GetOrderDto>> Create();
         Task<ServiceResponse<List<GetOrderDto>>> Update(int id, UpdateOrderDto dto);
         Task<ServiceResponse<GetOrderDto>> Realize(int id);
+        Task<ServiceResponse<List<GetOrderDto>>> Delete(int id);
     }
 }

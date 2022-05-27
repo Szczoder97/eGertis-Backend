@@ -21,9 +21,9 @@ namespace eGertis.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(string title)
+        public async Task<ActionResult> Create()
         {
-            return Ok(await _orderService.Create(title));
+            return Ok(await _orderService.Create());
         }
         
         [HttpPut("{id}")]
@@ -61,6 +61,16 @@ namespace eGertis.Controllers
         {
             var response = await _orderService.GetById(id);
             if(response.Success != true)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var response = await _orderService.Delete(id);
+            if (response.Success != true)
             {
                 return BadRequest(response);
             }

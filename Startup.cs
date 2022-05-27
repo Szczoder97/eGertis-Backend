@@ -47,6 +47,13 @@ namespace eGertis
                 });
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection")));
             services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "eGertis", Version = "v1" });
@@ -86,6 +93,8 @@ namespace eGertis
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();
 

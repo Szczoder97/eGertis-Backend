@@ -33,11 +33,10 @@ namespace eGertis.Services.Orders
             _itemWrapperRepository = itemWrapperRepository;
         }
 
-        public async Task<ServiceResponse<GetOrderDto>> Create(string title)
+        public async Task<ServiceResponse<GetOrderDto>> Create()
         {
             var serviceResponse = new ServiceResponse<GetOrderDto>();
             var order = new Order();
-            order.Title = title;
             var owner = await _userRepoitory.GetById(_authService.GetUserId());
             order.Owner = owner;
             var data = await _orderRepository.Create(order);
@@ -45,6 +44,22 @@ namespace eGertis.Services.Orders
             return serviceResponse; 
         }
 
+        public async Task<ServiceResponse<List<GetOrderDto>>> Delete(int id)
+        {
+            var serviceResponse = new ServiceResponse<List<GetOrderDto>>();
+            try
+            {
+                var orders = await _orderRepository.Delete(id);
+                serviceResponse.Data = GetOrderDtos(orders);
+                serviceResponse.Message = "Deleted order id: " + id;
+            }
+            catch(Exception e)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = e.Message;
+            }
+            return serviceResponse;
+        }
 
         public async Task<ServiceResponse<List<GetOrderDto>>> GetAll()
         {

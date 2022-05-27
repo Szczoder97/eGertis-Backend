@@ -35,9 +35,15 @@ namespace eGertis.Repositories.Orders
 
         public async Task<List<Order>> Delete(int id)
         {
+            var user = await _userRepository.GetById(_authService.GetUserId());
             var order = await GetById(id);
-            _context.Orders.Remove(order);
-            await _context.SaveChangesAsync();
+            if (user.Role.Equals(UserRole.Administrator) ||
+                user.Role.Equals(UserRole.SupplyWorker) ||
+                order.Owner.Equals(user))
+            {
+                _context.Orders.Remove(order);
+                await _context.SaveChangesAsync();
+            }
             return await GetAll();
         }
         public async Task<List<Order>> GetAll()
