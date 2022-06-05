@@ -48,12 +48,13 @@ namespace eGertis.Repositories.Orders
         }
         public async Task<List<Order>> GetAll()
         {
-            if(_authService.GetUserRole().Equals(UserRole.SupplyWorker))
+            if(_authService.GetUserRole().Equals(UserRole.SupplyWorker) || _authService.GetUserRole().Equals(UserRole.Administrator))
             {
-                return await _context.Orders.ToListAsync();
+                return await _context.Orders.OrderByDescending(order => order.Id).Include(order => order.Owner).ToListAsync();
             }
             var user = await _userRepository.GetById(_authService.GetUserId());
-            return await _context.Orders.Where(order => order.Owner.Equals(user)).ToListAsync();
+            return await _context.Orders.OrderByDescending(order => order.Id)
+                .Include(order => order.Owner).Where(order => order.Owner.Equals(user)).ToListAsync();
         }
 
         public async Task<Order> GetById(int id)
@@ -74,12 +75,12 @@ namespace eGertis.Repositories.Orders
             return await GetAll();
         }
 
-        public async Task<Order> Realize(int id)
+        public async Task<List<Order>> Realize(int id)
         {
             var order = await GetById(id);
             order.IsRealized = true;
             await _context.SaveChangesAsync();
-            return order;
+            return await GetAll();
         }
     }
 }

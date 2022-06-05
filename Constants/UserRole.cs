@@ -12,5 +12,6 @@ namespace eGertis.Constants
         public const string Purchaser = "Purchaser";
         public const string SupplyWorker = "SupplyWorker";
         public const string VerifiedUser = "Administrator,Purchaser,SupplyWorker";
+        public const string StaffUser = "Administrator,SupplyWorker";
     }
 }

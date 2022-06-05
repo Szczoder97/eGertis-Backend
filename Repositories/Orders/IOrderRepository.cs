@@ -14,6 +14,6 @@ namespace eGertis.Repositories.Orders
         Task<Order> Create(Order order);
         Task<List<Order>> Update(int orderId, string title, List<ItemWrapper> products);
         Task<List<Order>> Delete(int id);
-        Task<Order> Realize(int id);
+        Task<List<Order>> Realize(int id);
     }
 }

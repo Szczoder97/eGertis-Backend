@@ -12,6 +12,10 @@ using eGertis.Services.Auth;
 using eGertis.Services.Users;
 using eGertis.Repositories.Users;
 using eGertis.Repositories.ItemWrappers;
+using System.Text;
+using System.IO;
+using CsvHelper;
+using System.Globalization;
 
 namespace eGertis.Services.Orders
 {
@@ -33,20 +37,20 @@ namespace eGertis.Services.Orders
             _itemWrapperRepository = itemWrapperRepository;
         }
 
-        public async Task<ServiceResponse<GetOrderDto>> Create()
+        public async Task<ServiceResponse<OrderDto>> Create()
         {
-            var serviceResponse = new ServiceResponse<GetOrderDto>();
+            var serviceResponse = new ServiceResponse<OrderDto>();
             var order = new Order();
             var owner = await _userRepoitory.GetById(_authService.GetUserId());
             order.Owner = owner;
             var data = await _orderRepository.Create(order);
-            serviceResponse.Data = new GetOrderDto(data);
+            serviceResponse.Data = new OrderDto(data.Id, data.Owner.Id, data.Title, data.CreationDate, data.IsRealized);
             return serviceResponse; 
         }
 
-        public async Task<ServiceResponse<List<GetOrderDto>>> Delete(int id)
+        public async Task<ServiceResponse<List<OrderDto>>> Delete(int id)
         {
-            var serviceResponse = new ServiceResponse<List<GetOrderDto>>();
+            var serviceResponse = new ServiceResponse<List<OrderDto>>();
             try
             {
                 var orders = await _orderRepository.Delete(id);
@@ -61,9 +65,9 @@ namespace eGertis.Services.Orders
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetOrderDto>>> GetAll()
+        public async Task<ServiceResponse<List<OrderDto>>> GetAll()
         {
-            var serviceResponse = new ServiceResponse<List<GetOrderDto>>();
+            var serviceResponse = new ServiceResponse<List<OrderDto>>();
             try 
             {
                 var orders = await _orderRepository.GetAll(); 
@@ -93,13 +97,13 @@ namespace eGertis.Services.Orders
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<GetOrderDto>> Realize(int id)
+        public async Task<ServiceResponse<List<OrderDto>>> Realize(int id)
         {
-            var serviceResponse = new ServiceResponse<GetOrderDto>();
+            var serviceResponse = new ServiceResponse<List<OrderDto>>();
             try
             {
-                var order = await _orderRepository.Realize(id);
-                serviceResponse.Data = new GetOrderDto(order);
+                var orders = await _orderRepository.Realize(id);
+                serviceResponse.Data = GetOrderDtos(orders);
                 serviceResponse.Message = "Order: " + id + " realized!";
             }
             catch(Exception e)
@@ -110,9 +114,9 @@ namespace eGertis.Services.Orders
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetOrderDto>>> Update(int id, UpdateOrderDto dto)
+        public async Task<ServiceResponse<List<OrderDto>>> Update(int id, UpdateOrderDto dto)
         {
-            var serviceResponse = new ServiceResponse<List<GetOrderDto>>();
+            var serviceResponse = new ServiceResponse<List<OrderDto>>();
             try
             {
                 var productsToSave = dto.Products.Select(prod => _mapper.Map<ItemWrapper>(prod)).ToList();
@@ -133,12 +137,12 @@ namespace eGertis.Services.Orders
             return serviceResponse;
         }
 
-        private List<GetOrderDto> GetOrderDtos(List<Order> orders)
+        private List<OrderDto> GetOrderDtos(List<Order> orders)
         {
-            var data = new List<GetOrderDto>();
+            var data = new List<OrderDto>();
                 foreach(var order in orders)
                 {
-                    data.Add(new GetOrderDto(order));
+                    data.Add(new OrderDto(order.Id, order.Owner.Id, order.Title, order.CreationDate, order.IsRealized));
                 }
             return data;
         }
