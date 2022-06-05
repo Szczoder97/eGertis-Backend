@@ -37,7 +37,7 @@ namespace eGertis.Controllers
             return Ok(response);
         }
 
-        [Authorize(Roles = UserRole.SupplyWorker)]
+        [Authorize(Roles = UserRole.StaffUser)]
         [HttpGet("{id}/realize")]
         public async Task<ActionResult> Realize(int id)
         {
